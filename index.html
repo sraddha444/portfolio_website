@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name | Cloud Engineer</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#333;
+    line-height:1.6;
+}
+
+header{
+    background:#1f2937;
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
+
+header h1{
+    font-size:3rem;
+}
+
+header p{
+    margin-top:10px;
+    font-size:1.2rem;
+    color:#d1d5db;
+}
+
+.counter{
+    margin-top:20px;
+    font-size:1rem;
+    color:#93c5fd;
+}
+
+nav{
+    background:white;
+    padding:15px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+nav a{
+    text-decoration:none;
+    margin:0 15px;
+    color:#1f2937;
+    font-weight:bold;
+}
+
+section{
+    max-width:1000px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+h2{
+    color:#1f2937;
+    margin-bottom:20px;
+}
+
+.skills{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.skill{
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    text-align:center;
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.project{
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+
+form{
+    background:white;
+    padding:30px;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+textarea{
+    resize:vertical;
+    min-height:140px;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+#status{
+    margin-top:15px;
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    background:#1f2937;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>Sraddha Narasimhulu</h1>
+
+<p>AWS Cloud Engineer | Python | SQL | Cloud Support</p>
+
+<div class="counter">
+Visitors:
+<span id="visitor-count">Loading...</span>
+</div>
+
+</header>
+
+<nav>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section id="about">
+
+<h2>About Me</h2>
+
+<p>
+I am an aspiring AWS Cloud Engineer with a background in engineering and software
+testing. I enjoy building cloud-native solutions using AWS services including
+Amazon S3, CloudFront, Lambda, DynamoDB, API Gateway, and Amazon SES.
+</p>
+
+</section>
+
+<section id="skills">
+
+<h2>Skills</h2>
+
+<div class="skills">
+
+<div class="skill">AWS</div>
+
+<div class="skill">Python</div>
+
+<div class="skill">SQL</div>
+
+<div class="skill">Amazon S3</div>
+
+<div class="skill">CloudFront</div>
+
+<div class="skill">Lambda</div>
+
+<div class="skill">API Gateway</div>
+
+<div class="skill">DynamoDB</div>
+
+<div class="skill">IAM</div>
+
+<div class="skill">Git & GitHub</div>
+
+</div>
+
+</section>
+
+<section id="projects">
+
+<h2>Projects</h2>
+
+<div class="projects">
+
+<div class="project">
+<h3>Cloud Portfolio Website</h3>
+
+<p>
+Static website hosted on Amazon S3 and delivered globally using CloudFront with
+a serverless visitor counter powered by AWS Lambda and DynamoDB.
+</p>
+
+</div>
+
+<div class="project">
+<h3>Contact Form API</h3>
+
+<p>
+Serverless contact form using API Gateway, Lambda and Amazon SES to send
+messages securely.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2>Contact Me</h2>
+
+<form id="contact-form">
+
+<input
+type="text"
+id="name"
+placeholder="Your Name"
+required>
+
+<input
+type="email"
+id="email"
+placeholder="Email Address"
+required>
+
+<textarea
+id="message"
+placeholder="Your Message"
+required></textarea>
+
+<button type="submit">
+Send Message
+</button>
+
+<div id="status"></div>
+
+</form>
+
+</section>
+
+<footer>
+
+<p>© 2026 Your Name</p>
+
+</footer>
+
+<script>
+
+const API_BASE = "https://36tpi5hqqh.execute-api.us-east-1.amazonaws.com";
+
+async function loadVisitorCount(){
+
+    try{
+
+        const response = await fetch(`${API_BASE}/count`);
+
+        const data = await response.json();
+
+        document.getElementById("visitor-count").textContent = data.visitorcount;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        document.getElementById("visitor-count").textContent = "Unavailable";
+
+    }
+
+}
+
+document.getElementById("contact-form")
+.addEventListener("submit", async function(event){
+
+event.preventDefault();
+
+const status=document.getElementById("status");
+
+const payload={
+
+name:document.getElementById("name").value,
+
+email:document.getElementById("email").value,
+
+message:document.getElementById("message").value
+
+};
+
+try{
+
+const response=await fetch(`${API_BASE}/contact`,{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(payload)
+
+});
+
+if(response.ok){
+
+status.textContent="Message sent successfully.";
+
+this.reset();
+
+}
+
+else{
+
+status.textContent="Failed to send message.";
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+status.textContent="An error occurred.";
+
+}
+
+});
+
+loadVisitorCount();
+
+</script>
+
+</body>
+</html>
